@@ -70,7 +70,7 @@ class _ChatroomState extends State<Chatroom> {
         return Flexible(
           child: ListView.builder(
             padding: EdgeInsets.all(8),
-            reverse: true,
+           
             itemCount: messageList.length,
             itemBuilder: (context, int index) {
               return ChatMessage(
@@ -123,8 +123,9 @@ class _ChatroomState extends State<Chatroom> {
               Expanded(
                 child: TextField(
                   controller: msgTextController,
+                  style: TextStyle(fontSize: 18),
                   decoration: InputDecoration.collapsed(
-                    fillColor: Colors.white,
+                    fillColor: Colors.white,            
                     filled: true,
                     hintText: "Type a message",
                   ),
@@ -157,7 +158,7 @@ class _ChatroomState extends State<Chatroom> {
               icon: Icon( ( (msgTextController.text.length == 0)) ? sendicon : Icons.send),
               onPressed: () {
                 setState(() {
-                  messageList.add('Some random text');
+                  messageList.add(msgTextController.text);
                   msgTextController.text = '';
                 });
               },
