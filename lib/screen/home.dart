@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/screen/calls/calls.dart';
 import 'package:whatsapp/screen/chat/chat.dart';
+import 'package:whatsapp/screen/contacts/contacts.dart';
 import 'package:whatsapp/screen/status/status.dart';
 
 
@@ -44,7 +45,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[Chat(), Chat(), Status(), Calls()],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => {},
+          onPressed: () => {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Contacts()))
+          },
           child: Icon(Icons.message),
           backgroundColor: Colors.green,
         ),

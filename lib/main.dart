@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'WhatsappClone',
       theme: ThemeData(
        // primarySwatch: Colors.teal,
-        primaryColor: Colors.teal[900]
+        primaryColor:Color(0xff075e54)
       ),
       home: HomePage(),
     );

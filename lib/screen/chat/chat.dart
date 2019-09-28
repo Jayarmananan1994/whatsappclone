@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/screen/chatroom/chatroom.dart';
 
 class Chat extends StatelessWidget {
-  var list = [
+  final list = [
     ChatItem(
         circleAvatar:
             'https://image.shutterstock.com/image-vector/man-character-face-avatar-glasses-600w-542759665.jpg',
@@ -58,14 +59,41 @@ class Chat extends StatelessWidget {
           ),
           itemBuilder: (BuildContext ctxt, int index) {
             return ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(list[index].circleAvatar),
-                radius: 30,
+              leading: GestureDetector(
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(list[index].circleAvatar),
+                  radius: 30,
+                ),
+                onTap: () {
+                  return showDialog( context: ctxt, builder: (ctxt){
+                      return SimpleDialog(
+
+                        children: <Widget>[                          
+                          Image.network(list[index].circleAvatar),
+                          ButtonBar(
+                            alignment: MainAxisAlignment.spaceEvenly, 
+                             children: <Widget>[
+                            IconButton(icon: Icon(Icons.message),onPressed: (){}, color: Color(0xff075e54),),
+                            IconButton(icon: Icon(Icons.call),onPressed: (){},color: Color(0xff075e54)),
+                            IconButton(icon: Icon(Icons.videocam),onPressed: (){},color: Color(0xff075e54)),
+                            IconButton(icon: Icon(Icons.info_outline),onPressed: (){},color: Color(0xff075e54)),
+                          ],)
+                        ],
+                      );
+                  });
+                },
               ),
               title: Text(list[index].name,
                   style: TextStyle(fontWeight: FontWeight.w600)),
               subtitle: Text(list[index].lastMessage),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    ctxt,
+                    MaterialPageRoute(
+                        builder: (context) => Chatroom(
+                              chatItem: list[index],
+                            )));
+              },
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -85,11 +113,15 @@ class Chat extends StatelessWidget {
                       width: 20,
                       height: 20,
                       decoration: BoxDecoration(
-                        color: ( list[index].unread>0) ? Colors.green[400]: Colors.transparent,
+                        color: (list[index].unread > 0)
+                            ? Colors.green[400]
+                            : Colors.transparent,
                         shape: BoxShape.circle,
                       ),
                       child: Text(
-                        ( list[index].unread>0) ? list[index].unread.toString() : '',
+                        (list[index].unread > 0)
+                            ? list[index].unread.toString()
+                            : '',
                         style: TextStyle(fontSize: 11, color: Colors.white),
                         textAlign: TextAlign.center,
                       ))
